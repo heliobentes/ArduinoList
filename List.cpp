@@ -153,7 +153,7 @@ unsigned long List<T>::count()
 
 /**
  * Parse the list into array
- * @return T aray - The array with all list items
+ * @return T array - The array with all list items
  **/
 template <class T>
 T *List<T>::toArray()

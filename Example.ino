@@ -2,6 +2,10 @@
 
 List<int> ids;
 
+List<char*> names;
+
+List<int*> arrayOfInts;
+
 void setup()
 {
 
@@ -12,6 +16,9 @@ void setup()
     {
         ids.add(i);
     }
+    names.add("John Doe");
+    int arrayToAdd[] = {1,2,3,4};
+    arrayOfInts.add(arrayToAdd);
 }
 
 void loop()
@@ -36,5 +43,28 @@ void loop()
         Serial.print(" ");
     }
     Serial.println();
+
+   Serial.print("Number of names: ");
+   Serial.println(names.count());
+    for (unsigned long i = 0; i < names.count(); i++)
+    {
+        Serial.println(names.get(i));
+    }
+    Serial.print("Number of arrays: ");
+   Serial.println(arrayOfInts.count());
+    for (unsigned long i = 0; i < arrayOfInts.count(); i++)
+    {
+        int arrayToPrint[4];
+        
+        memcpy(arrayToPrint, arrayOfInts.get(i),4);
+        for (int j = 0; j < 4; j++)
+        {
+            /* code */
+    
+        Serial.println(arrayToPrint[j]);
+            /* code */
+        }
+        
+    }
     delay(10000);
 }
