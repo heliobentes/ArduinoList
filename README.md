@@ -3,9 +3,9 @@
 <div align="center">
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+[![GitHub Issues](https://img.shields.io/github/issues/heliobentes/ArduinoList)](https://github.com/heliobentes/ArduinoList/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/heliobentes/ArduinoList)](https://github.com/heliobentes/ArduinoList/pulls)
+[![License](https://img.shields.io/badge/license-Apache-blue.svg)](/LICENSE)
 
 </div>
 
