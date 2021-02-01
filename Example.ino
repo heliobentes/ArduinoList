@@ -14,7 +14,7 @@ void setup()
     Serial.begin(115200);
 
     Serial.println("Starting...");
-    for (int i = 0; i < 600; i++)
+    for (int i = 0; i < 700; i++)
     {
         ids.add(i);
     }
@@ -32,7 +32,7 @@ void loop()
     //ids.remove(0);
     for (int i = 0; i < 10; i++)
     {
-        ids.add(count++);
+     //   ids.add(count++);
     }
     for (int i = 0; i < ids.count(); i++)
     {
@@ -75,6 +75,6 @@ void loop()
         
     }
     //Remember do dispose your List after use
-    ids.dispose();
+    //ids.dispose();
     delay(1000);
 }

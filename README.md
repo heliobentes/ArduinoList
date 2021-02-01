@@ -175,12 +175,13 @@ void loop() {
   int size = ids.count();
   ```
 - <b>toArray</b>: Converts the list into an array
-  - params: none
-  - return:
-    - array - The array with all list items
+  - params:
+    - &array - The array with all list items
+  - return: none
   ```
   //Converting to array
-  int *array = ids.toArray();
+  int *idsArray = new int [ids.count()];
+  ids.toArray(idsArray);
   ```
 
 ## Examples
