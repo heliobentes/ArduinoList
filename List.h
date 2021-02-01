@@ -10,18 +10,19 @@ class List
 {
 public:
   List();
-  
+
   void add(T item);
   void remove(T item);
   void removeAll(T item);
-  void removeAt(unsigned long index);
-  
-  unsigned long find(T item);
-  unsigned long count();
-  
-  T get(unsigned long index);
-  
-  T * toArray();
+  void removeAt(int index);
+  void toArray(T *&refArray);
+  void dispose();
+
+  int find(T item);
+  int count();
+
+  T get(int index);
+
 
 private:
   typedef struct Node
@@ -33,7 +34,7 @@ private:
 
   Node *_first;
   Node *_last;
-  unsigned long _count = 0;
+  int _count = 0;
 };
 
 #endif

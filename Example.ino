@@ -6,13 +6,15 @@ List<char*> names;
 
 List<int*> arrayOfInts;
 
+int count = 0;
+
 void setup()
 {
 
     Serial.begin(115200);
 
     Serial.println("Starting...");
-    for (unsigned long i = 0; i < 100; i++)
+    for (int i = 0; i < 600; i++)
     {
         ids.add(i);
     }
@@ -25,34 +27,40 @@ void loop()
 {
     Serial.print("Size: ");
     Serial.println(ids.count());
-    ids.removeAll(555);
-    ids.removeAt(99);
-    ids.remove(12);
-    ids.add(12345);
-    for (unsigned long i = 0; i < ids.count(); i++)
+    //ids.removeAll(555);
+    //ids.removeAt(0);
+    //ids.remove(0);
+    for (int i = 0; i < 10; i++)
+    {
+        ids.add(count++);
+    }
+    for (int i = 0; i < ids.count(); i++)
     {
         Serial.println(ids.get(i));
     }
     Serial.print("Size: ");
     Serial.println(ids.count());
     Serial.print("Array: ");
-    int *array = ids.toArray();
+    int *idsArray = new int [ids.count()];
+    ids.toArray(idsArray);
     for (size_t i = 0; i < ids.count(); i++)
     {
-        Serial.print(array[i]);
+        Serial.print(idsArray[i]);
         Serial.print(" ");
     }
     Serial.println();
+    //Remember do dispose your array after use
+    delete [] idsArray;
 
    Serial.print("Number of names: ");
    Serial.println(names.count());
-    for (unsigned long i = 0; i < names.count(); i++)
+    for (int i = 0; i < names.count(); i++)
     {
         Serial.println(names.get(i));
     }
     Serial.print("Number of arrays: ");
    Serial.println(arrayOfInts.count());
-    for (unsigned long i = 0; i < arrayOfInts.count(); i++)
+    for (int i = 0; i < arrayOfInts.count(); i++)
     {
         int arrayToPrint[4];
         
@@ -66,5 +74,7 @@ void loop()
         }
         
     }
-    delay(10000);
+    //Remember do dispose your List after use
+    ids.dispose();
+    delay(1000);
 }

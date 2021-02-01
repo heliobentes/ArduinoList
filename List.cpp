@@ -8,7 +8,25 @@ template <class T>
 List<T>::List()
 {
 }
-
+/**
+ * Dispose the List to free memory
+ **/
+template <class T>
+void List<T>::dispose()
+{
+  Node *node = _first;
+  for (int i = 1; i < _count; i++)
+  {
+    node = node->next;
+    delete node->prev;
+    node->prev = NULL;
+  }
+  delete node->prev;
+  node->prev = NULL;
+  delete node;
+  node = NULL;
+  _count = 0;
+}
 /**
  * Adding a new element to the end of the List
  * @param item any - The element to insert to the list
@@ -46,7 +64,7 @@ void List<T>::add(T item)
 template <class T>
 void List<T>::remove(T item)
 {
-  unsigned long index = find(item);
+  int index = find(item);
   if (index >= 0)
   {
     removeAt(index);
@@ -60,7 +78,7 @@ void List<T>::remove(T item)
 template <class T>
 void List<T>::removeAll(T item)
 {
-  unsigned long index = find(item);
+  int index = find(item);
 
   while (index != -1)
   {
@@ -71,29 +89,37 @@ void List<T>::removeAll(T item)
 
 /**
  * Remove the item on the position defined by the provided index from the List
- * @param index unsigned long - The index to remove from the list
+ * @param index int - The index to remove from the list
  **/
 template <class T>
-void List<T>::removeAt(unsigned long index)
+void List<T>::removeAt(int index)
 {
   //execute only if list is not empty and the index is inside the bounds
   if (_count > 0 && index >= 0 && index < _count)
   {
     //interacting until the index
     Node *node = _first;
-    
-    for (unsigned long i = 0; i < index; i++)
+
+    for (int i = 0; i < index; i++)
     {
       node = node->next;
     }
-    node->next->prev = node->prev;
-    node->prev->next = node->next;
 
-    if(index==0){
+    if (index == 0)
+    {
       _first = node->next;
     }
-    if(index==_count-1){
+    else
+    {
+      node->prev->next = node->next;
+    }
+    if (index == _count - 1)
+    {
       _last = node->prev;
+    }
+    else
+    {
+      node->next->prev = node->prev;
     }
     delete node;
     _count--;
@@ -102,10 +128,10 @@ void List<T>::removeAt(unsigned long index)
 /**
  * Getting the element at the provided index
  * @return any - The item
- * @param index unsigned long - The index to retrieve the value. Must be greater than 0 and lass than the number of items in the list
+ * @param index int - The index to retrieve the value. Must be greater than 0 and lass than the number of items in the list
  **/
 template <class T>
-T List<T>::get(unsigned long index)
+T List<T>::get(int index)
 {
   //returning null if list is empty or the index is outside the bounds
   if (_count == 0 || index < 0 || index >= _count)
@@ -113,7 +139,7 @@ T List<T>::get(unsigned long index)
 
   //interacting until the index
   Node *node = _first;
-  for (unsigned long i = 0; i < index; i++)
+  for (int i = 0; i < index; i++)
   {
     node = node->next;
   }
@@ -123,16 +149,16 @@ T List<T>::get(unsigned long index)
 /**
  * Find the index for the given element
  * @param item any - The element to find in the list
- * @return unsigned long - The index of the element. Returns -1 if not found;
+ * @return int - The index of the element. Returns -1 if not found;
  **/
 template <class T>
-unsigned long List<T>::find(T item)
+int List<T>::find(T item)
 {
   //interacting until the index
   Node *node = _first;
   if (node->item == item)
     return 0;
-  for (unsigned long i = 0; i < _count - 1; i++)
+  for (int i = 0; i < _count - 1; i++)
   {
     node = node->next;
     if (node->item == item)
@@ -143,30 +169,31 @@ unsigned long List<T>::find(T item)
 
 /**
  * Counting the number of items in the list
- * @return unsigned long - Number of items
+ * @return int - Number of items
  **/
 template <class T>
-unsigned long List<T>::count()
+int List<T>::count()
 {
   return _count;
 }
 
 /**
  * Parse the list into array
- * @return T array - The array with all list items
+ * @param refArray array - The array to fill with the list elements. Needs to be greater than the List size
  **/
 template <class T>
-T *List<T>::toArray()
+void List<T>::toArray(T *&refArray)
 {
-  T *array = new T[_count];
-  Node *node = _first;
-  array[0] = node->item;
-  for (unsigned long i = 0; i < _count - 1; i++)
+  if (_count > 0)
   {
-    node = node->next;
-    array[i + 1] = node->item;
+    Node *node = _first;
+    refArray[0] = node->item;
+    for (int i = 1; i < _count; i++)
+    {
+      node = node->next;
+      refArray[i] = node->item;
+    }
   }
-  return array;
 }
 // template void List<int>::add(int);
 // No need to call this TemporaryFunction() function,
