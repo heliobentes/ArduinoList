@@ -100,9 +100,11 @@ void loop() {
 ### Methods
 
 - <b>List</b>: Class constructor
+
   - params:
     - any class type
   - return: nothing
+
   ```
   //Instantiating a new int List
   List<int> ids;
@@ -116,6 +118,7 @@ void loop() {
   //Instantiating a new int array List
   List<int*> ids;
   ```
+
 - <b>add</b>: Adding a new element to the end of the List
   - params:
     - item any - The element to insert to the list
@@ -182,6 +185,15 @@ void loop() {
   //Converting to array
   int *idsArray = new int [ids.count()];
   ids.toArray(idsArray);
+  //Remember do dispose your array after use
+  delete [] idsArray;
+  ```
+- <b>dispose</b>: Dispose the List to free memory
+  - params: none
+  - return: none
+  ```
+  //Free memory
+  ids.dispose();
   ```
 
 ## Examples
